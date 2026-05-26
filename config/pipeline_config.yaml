@@ -1,0 +1,35 @@
+sources:
+  inventory:
+    type: "csv"
+    path: "data/raw/inventory.csv"
+  orders:
+    type: "csv"
+    path: "data/raw/orders.csv"
+  suppliers:
+    type: "csv"
+    path: "data/raw/suppliers.csv"
+
+aws:
+  region: "us-east-1"
+  s3_bucket: "supply-chain-data-lake"
+  s3_raw_prefix: "supply_chain/raw"
+  s3_processed_prefix: "supply_chain/processed"
+  redshift_host: "your-cluster.redshift.amazonaws.com"
+  redshift_port: 5439
+  redshift_db: "analytics"
+  redshift_schema: "supply_chain"
+
+spark:
+  app_name: "SupplyChainETL"
+  master: "local[*]"
+  executor_memory: "4g"
+  driver_memory: "2g"
+
+forecast:
+  target_col: "units_sold"
+  horizon_days: 30
+  train_months: 12
+  n_estimators: 200
+  max_depth: 8
+  random_state: 42
+  output_table: "demand_forecast"
